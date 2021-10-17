@@ -21,10 +21,16 @@ class PriceCode:
 	def __init__(self, movie):
 		self.movie_code = movie.get_price_code()
 
+	def is_code_exist(self):
+		return self.movie_code in self.PRICE_CODE.keys()
+
 	def price(self, days_rented):
-		if self.movie_code in self.PRICE_CODE.keys():
+		if self.is_code_exist():
 			return self.PRICE_CODE[self.movie_code]["price"](days_rented)
-		raise KeyError()
+
+	def frequent_renter_points(self, day_rented):
+		if self.is_code_exist():
+			return self.PRICE_CODE[self.movie_code]["frp"](day_rented)
 
 class Rental:
 	"""
@@ -62,9 +68,4 @@ class Rental:
 		return amount
 
 	def get_rental_points(self):
-		frequent_renter_points = 0
-		if self.get_movie().get_price_code() == Movie.NEW_RELEASE:
-			frequent_renter_points += self.get_days_rented()
-		else:
-			frequent_renter_points += 1
-		return frequent_renter_points
+		return self.price_code.frequent_renter_points(self.days_rented)
