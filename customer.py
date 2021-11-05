@@ -2,6 +2,7 @@ from rental import Rental
 from movie import Movie
 import logging
 
+
 class Customer:
     """
        A customer who rents movies.
@@ -17,13 +18,13 @@ class Customer:
     def add_rental(self, rental: Rental):
         if rental not in self.rentals:
             self.rentals.append(rental)
-    
+
     def get_name(self):
         return self.name
-    
+
     def statement(self):
         """
-            Print all the rentals in current period, 
+            Print all the rentals in current period,
             along with total charges and reward points.
             Returns:
                 the statement as a String
@@ -34,7 +35,7 @@ class Customer:
         fmt = "{:32s}    {:4s} {:6s}\n"
         statement += fmt.format("Movie Title", "Days", "Price")
         fmt = "{:32s}   {:4d} {:6.2f}\n"
-        
+
         for rental in self.rentals:
             # award renter points
             frequent_renter_points += rental.get_rental_points()

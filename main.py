@@ -4,14 +4,15 @@
 from movie import Movie
 from rental import Rental
 from customer import Customer
+from price_code import PriceCode
 
 def make_movies():
     movies = [
-        Movie("The Irishman", Movie.NEW_RELEASE),
-        Movie("CitizenFour", Movie.REGULAR),
-        Movie("Frozen", Movie.CHILDRENS),
-        Movie("El Camino", Movie.NEW_RELEASE),
-        Movie("Particle Fever", Movie.REGULAR)
+        Movie("The Irishman", PriceCode.NEW_RELEASE),
+        Movie("CitizenFour", PriceCode.REGULAR),
+        Movie("Frozen", PriceCode.CHILDRENS),
+        Movie("El Camino", PriceCode.NEW_RELEASE),
+        Movie("Particle Fever", PriceCode.REGULAR)
     ]
     return movies
 

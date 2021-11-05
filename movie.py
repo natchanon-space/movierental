@@ -1,13 +1,10 @@
+from price_code import PriceCode
+
 class Movie:
 	"""
 	A movie available for rent.
 	"""
-	# The types of movies (price_code). 
-	REGULAR = 0
-	NEW_RELEASE = 1
-	CHILDRENS = 2
-	
-	def __init__(self, title, price_code):
+	def __init__(self, title: str, price_code: PriceCode):
 		# Initialize a new movie. 
 		self.title = title
 		self.price_code = price_code
