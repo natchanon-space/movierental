@@ -1,7 +1,28 @@
+from enum import Enum
 from movie import Movie
+from datetime import datetime
 import logging
 
-from price_code import PriceCode
+
+class PriceCode(Enum):
+	REGULAR = {
+		"price": lambda days: 2.0 + 1.5*max(0, days-2),
+		"frp": lambda days: 1
+	}
+	CHILDRENS = {
+		"price": lambda days: 1.5 + 1.5*max(0, days-3),
+		"frp": lambda days: 1
+	}
+	NEW_RELEASE = {
+		"price": lambda days: 3.0*days,
+		"frp": lambda days: days
+	}
+
+	def price(self, days_rented):
+		return self.value["price"](days_rented)
+
+	def frequent_renter_points(self, day_rented):
+		return self.value["frp"](day_rented)
 
 
 class Rental:
@@ -41,3 +62,13 @@ class Rental:
 
 	def get_rental_points(self):
 		return self.price_code.frequent_renter_points(self.days_rented)
+
+	@classmethod
+	def for_movie(self, movie: Movie):
+		current_year = datetime.now().year
+		children = "Children"
+		if current_year == movie.get_year():
+			return PriceCode.NEW_RELEASE
+		if movie.is_genre("Children"):
+			return PriceCode.CHILDRENS
+		return PriceCode.REGULAR

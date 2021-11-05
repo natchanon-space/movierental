@@ -1,3 +1,4 @@
+import csv
 from typing import List
 
 
@@ -26,3 +27,22 @@ class Movie:
 	
 	def __str__(self):
 		return self.title
+
+
+class MovieCatalog:
+	CATALOG_PATH = "movies.csv"
+
+	def __init__(self) -> None:
+		self.data = {}
+		with open(self.CATALOG_PATH) as f:
+			reader = csv.DictReader(f)
+			for line in reader:
+				self.data[line["title"]] = {
+					"#id": line["#id"],
+					"year": line["year"],
+					"genre": [g for g in line["genres"].split("|")] 
+				}
+
+	def get_movie(self, title) -> Movie:
+		movie = self.data[title]
+		return Movie(title, movie["year"], movie["genre"])
