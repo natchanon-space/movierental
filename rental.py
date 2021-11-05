@@ -1,6 +1,8 @@
 from movie import Movie
 import logging
 
+from price_code import PriceCode
+
 
 class Rental:
 	"""
@@ -14,13 +16,13 @@ class Rental:
 	field is used.
 	"""
 	
-	def __init__(self, movie: Movie, days_rented: int): 
+	def __init__(self, movie: Movie, days_rented: int, price_code: PriceCode): 
 		"""Initialize a new movie rental object for
 		   a movie with known rental period (daysRented).
 		"""
 		self.movie = movie
 		self.days_rented = days_rented
-		self.price_code = self.movie.price_code
+		self.price_code = price_code
 
 	def get_movie(self):
 		return self.movie

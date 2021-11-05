@@ -1,13 +1,10 @@
-from price_code import PriceCode
-
 class Movie:
 	"""
 	A movie available for rent.
 	"""
-	def __init__(self, title: str, price_code: PriceCode):
+	def __init__(self, title: str):
 		# Initialize a new movie. 
 		self.title = title
-		self.price_code = price_code
 
 	def get_price_code(self):
 		# get the price code
