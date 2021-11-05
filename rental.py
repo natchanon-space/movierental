@@ -65,8 +65,8 @@ class Rental:
 
 	@classmethod
 	def for_movie(self, movie: Movie):
+		"""Get price code for a moive."""
 		current_year = datetime.now().year
-		children = "Children"
 		if current_year == movie.get_year():
 			return PriceCode.NEW_RELEASE
 		if movie.is_genre("Children"):

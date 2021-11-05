@@ -44,5 +44,5 @@ class MovieCatalog:
 				}
 
 	def get_movie(self, title) -> Movie:
-		movie = self.data[title]
-		return Movie(title, movie["year"], movie["genre"])
+		movie_data = self.data[title]
+		return Movie(title, movie_data["year"], movie_data["genre"])
