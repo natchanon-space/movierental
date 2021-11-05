@@ -24,6 +24,16 @@ class PriceCode(Enum):
 	def frequent_renter_points(self, day_rented):
 		return self.value["frp"](day_rented)
 
+	@classmethod
+	def for_movie(self, movie: Movie):
+		"""Get price code for a moive."""
+		current_year = datetime.now().year
+		if current_year == movie.get_year():
+			return PriceCode.NEW_RELEASE
+		if movie.is_genre("Children"):
+			return PriceCode.CHILDRENS
+		return PriceCode.REGULAR
+		
 
 class Rental:
 	"""
@@ -63,12 +73,3 @@ class Rental:
 	def get_rental_points(self):
 		return self.price_code.frequent_renter_points(self.days_rented)
 
-	@classmethod
-	def for_movie(self, movie: Movie):
-		"""Get price code for a moive."""
-		current_year = datetime.now().year
-		if current_year == movie.get_year():
-			return PriceCode.NEW_RELEASE
-		if movie.is_genre("Children"):
-			return PriceCode.CHILDRENS
-		return PriceCode.REGULAR
