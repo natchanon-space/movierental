@@ -39,7 +39,7 @@ class MovieCatalog:
 			for line in reader:
 				self.data[line["title"]] = {
 					"#id": line["#id"],
-					"year": line["year"],
+					"year": int(line["year"]),
 					"genre": [g for g in line["genres"].split("|")] 
 				}
 
